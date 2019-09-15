@@ -1,0 +1,27 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <map>
+#include <random>
+#include <cmath>
+
+
+
+int main()
+{
+
+
+    std::random_device rd{};
+    std::mt19937 gen{rd()};
+
+    std::normal_distribution<> d{100,1};
+
+    std::map<int, int> hist{};
+    for(int n=0; n<1000; ++n) {
+        ++hist[std::round(d(gen))];
+    }
+    for(auto p : hist) {
+        std::cout << std::setw(2)
+                  << p.first << ' ' << std::string(p.second/10, '*') << '\n';
+    }
+}
